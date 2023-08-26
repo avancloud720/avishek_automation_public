@@ -8,6 +8,7 @@ on:
     types: [created]
 
 env:
+  GHE_TOKEN: ${{ secrets.GHE_TOKEN }}
   separator: "###"
   label_marker_start: "---"
   label_marker_end: "---"
