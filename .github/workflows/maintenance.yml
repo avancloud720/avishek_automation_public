@@ -1,0 +1,54 @@
+name: Maintenance Workflow
+
+on:
+  issues:
+    types:
+      - opened
+  issue_comment:
+    types: [created]
+
+env:
+  separator: "###"
+  label_marker_start: "---"
+  label_marker_end: "---"
+
+jobs:
+  welcome-message:
+    if: (github.event_name == 'issues' && github.event.action == 'opened' && (contains(github.event.issue.title, 'Maintenance')))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: welcome message
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ secrets.GHE_AUTO4_TOKEN }}
+          script: |
+            if ( ${{ contains(github.event.issue.title, 'Maintenance') }} ) {
+              github.issues.createComment({
+                  issue_number: "${{ github.event.issue.number }}",
+                  owner: "${{ github.repository_owner }}",
+                  repo: "${{ github.event.repository.name }}",
+                  body: "# 👋 Thanks for opening Maintenance Page Update issue!!"
+              });
+            }
+
+  update-maintenance-page:
+    if: (github.event_name == 'issue_comment' && contains(github.event.issue.title, 'Maintenance'))
+    runs-on: ubuntu-latest
+    # outputs:
+    #   status: ${{ steps.corestack_tenant.outputs.success }}
+    steps:
+      - name: Checkout DevOps-Workflow
+        uses: actions/checkout@v3
+      - name: Get issue body
+        id: get_issue_body
+        uses: ./.github/actions/get-issue-body
+        with:
+          issue_id: ${{ github.event.issue.number }}
+          issue_body: ${{ github.event.issue.body }}
+      - name: Print variables of the issue body
+        run: |
+          echo ${{ steps.get_issue_body.outputs.payload }}
