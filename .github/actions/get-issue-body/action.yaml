@@ -1,0 +1,35 @@
+name: Issue Body Parser
+description: Parses the body of an issue
+inputs:
+  issue_id:
+    description: The id of the issue
+    required: true
+
+  issue_body:
+    description: The issue body
+    required: true
+
+  separator:
+    description: The separator for the form sections in the issue
+    required: false
+    default: "###"
+
+  label_marker_start:
+    description: The string that is used to identify the start of the form label field
+    required: false
+    default: "---"
+
+  label_marker_end:
+    description: The string that is used to identify the end of the form label field
+    required: false
+    default: "---"
+
+outputs:
+  success:
+    description: The result of the process Creation / Deletion / Modification
+  payload:
+    description: The extracted payload data from the issue body labels in JSON encoded form
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
