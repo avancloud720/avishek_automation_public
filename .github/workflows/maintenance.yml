@@ -15,7 +15,7 @@ env:
 
 jobs:
   welcome-message:
-    if: (github.event_name == 'issues' && github.event.action == 'opened' && (contains(github.event.issue.title, 'creation') || contains(github.event.issue.title, 'deletion') || contains(github.event.issue.title, 'modification')))
+    if: (github.event_name == 'issues' && github.event.action == 'opened' && (contains(github.event.issue.title, 'Maintenance')))
     runs-on: ubuntu-latest
     steps:
       - name: Github context
