@@ -8,7 +8,7 @@ on:
     types: [created]
 
 env:
-  GHE_TOKEN: ${{ secrets.GHE_TOKEN }}
+  # GHE_TOKEN: ${{ secrets.GHE_TOKEN }}
   separator: "###"
   label_marker_start: "---"
   label_marker_end: "---"
@@ -25,7 +25,7 @@ jobs:
       - name: welcome message
         uses: actions/github-script@v3
         with:
-          github-token: ${{ secrets.GHE_TOKEN }}
+          # github-token: ${{ env.GHE_TOKEN }}
           script: |
             if ( ${{ contains(github.event.issue.title, 'Maintenance') }} ) {
               github.issues.createComment({
