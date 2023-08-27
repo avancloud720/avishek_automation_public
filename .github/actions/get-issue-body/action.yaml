@@ -26,7 +26,7 @@ inputs:
 
 outputs:
   success:
-    description: The result of the process Creation / Deletion / Modification
+    description: The result of the process modification
   payload:
     description: The extracted payload data from the issue body labels in JSON encoded form
 
