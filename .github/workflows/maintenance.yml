@@ -1,13 +1,11 @@
 name: Maintenance Workflow
 
 on:
-  push:
-    branches: ["main"]
-  # issues:
-  #   types:
-  #     - opened
-  # issue_comment:
-  #   types: [created]
+  issues:
+    types:
+      - opened
+  issue_comment:
+    types: [created]
 
 env:
   # GHE_TOKEN: ${{ secrets.GHE_TOKEN }}
@@ -17,7 +15,7 @@ env:
 
 jobs:
   welcome-message:
-    # if: (github.event_name == 'issues' && github.event.action == 'opened' && (contains(github.event.issue.title, 'Maintenance')))
+    if: (github.event_name == 'issues' && github.event.action == 'opened' && (contains(github.event.issue.title, 'Maintenance')))
     runs-on: ubuntu-latest
     steps:
       - name: Github context
