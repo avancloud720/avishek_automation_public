@@ -35,13 +35,6 @@ jobs:
                   body: "# 👋 Thanks for opening update maintenance page issue!!\n\n> **NOTE:** Please don't remove/add any label since this labels are used for the automation process."
               });
             }
-
-  update-maintenance-page:
-    # if: (github.event_name == 'issue_comment')
-    runs-on: ubuntu-latest
-    # outputs:
-    #   status: ${{ steps.corestack_tenant.outputs.success }}
-    steps:
       - name: Checkout DevOps-Workflow
         uses: actions/checkout@v3
       - name: Get issue body
