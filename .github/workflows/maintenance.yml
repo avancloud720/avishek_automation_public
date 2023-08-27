@@ -1,11 +1,13 @@
 name: Maintenance Workflow
 
 on:
-  issues:
-    types:
-      - opened
-  issue_comment:
-    types: [created]
+  push:
+    branches: ["main"]
+  # issues:
+  #   types:
+  #     - opened
+  # issue_comment:
+  #   types: [created]
 
 env:
   # GHE_TOKEN: ${{ secrets.GHE_TOKEN }}
@@ -15,7 +17,7 @@ env:
 
 jobs:
   welcome-message:
-    if: (github.event_name == 'issues' && github.event.action == 'opened' && (contains(github.event.issue.title, 'Maintenance')))
+    # if: (github.event_name == 'issues' && github.event.action == 'opened' && (contains(github.event.issue.title, 'Maintenance')))
     runs-on: ubuntu-latest
     steps:
       - name: Github context
@@ -36,20 +38,20 @@ jobs:
               });
             }
 
-  update-maintenance-page:
-    if: (github.event_name == 'issue_comment' && contains(github.event.issue.title, 'Maintenance'))
-    runs-on: ubuntu-latest
-    # outputs:
-    #   status: ${{ steps.corestack_tenant.outputs.success }}
-    steps:
-      - name: Checkout DevOps-Workflow
-        uses: actions/checkout@v3
-      - name: Get issue body
-        id: get_issue_body
-        uses: ./.github/actions/get-issue-body
-        with:
-          issue_id: ${{ github.event.issue.number }}
-          issue_body: ${{ github.event.issue.body }}
-      - name: Print variables of the issue body
-        run: |
-          echo ${{ steps.get_issue_body.outputs.payload }}
+  # update-maintenance-page:
+  #   if: (github.event_name == 'issue_comment' && contains(github.event.issue.title, 'Maintenance'))
+  #   runs-on: ubuntu-latest
+  #   # outputs:
+  #   #   status: ${{ steps.corestack_tenant.outputs.success }}
+  #   steps:
+  #     - name: Checkout DevOps-Workflow
+  #       uses: actions/checkout@v3
+  #     - name: Get issue body
+  #       id: get_issue_body
+  #       uses: ./.github/actions/get-issue-body
+  #       with:
+  #         issue_id: ${{ github.event.issue.number }}
+  #         issue_body: ${{ github.event.issue.body }}
+  #     - name: Print variables of the issue body
+  #       run: |
+  #         echo ${{ steps.get_issue_body.outputs.payload }}
