@@ -3,11 +3,11 @@ description: Parses the body of an issue
 inputs:
   issue_id:
     description: The id of the issue
-    required: true
+    required: false
 
   issue_body:
     description: The issue body
-    required: true
+    required: false
 
   separator:
     description: The separator for the form sections in the issue
