@@ -37,7 +37,7 @@ jobs:
             }
 
   update-maintenance-page:
-    if: (github.event_name == 'issue_comment' && contains(github.event.issue.title, 'Maintenance'))
+    if: (github.event_name == 'issue_comment')
     runs-on: ubuntu-latest
     # outputs:
     #   status: ${{ steps.corestack_tenant.outputs.success }}
