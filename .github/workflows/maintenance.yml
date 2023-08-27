@@ -25,7 +25,7 @@ jobs:
       - name: welcome message
         uses: actions/github-script@v3
         with:
-          github-token: ${{ secrets.GHE_AUTO4_TOKEN }}
+          github-token: ${{ secrets.GHE_TOKEN }}
           script: |
             if ( ${{ contains(github.event.issue.title, 'Maintenance') }} ) {
               github.issues.createComment({
